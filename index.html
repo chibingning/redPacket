@@ -1,0 +1,84 @@
+﻿<!--@model TemplateViewModel-->
+<!--@{ -->
+<!--Layout = null;-->
+<!--}-->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摇一摇抽红包</title>
+    <link href="css/shake.css" rel="stylesheet" />
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery.cookie.min.js"></script>
+    <script>
+        //       var Merchant = '@ViewContext.RouteData.Values["Merchant"].ToString()'; limiting = @ViewBag.Limit;
+        (function () {
+            var html = document.documentElement;
+            var hWidth = html.getBoundingClientRect().width;
+            html.style.fontSize = hWidth / 15 + "px";
+        })()
+    </script>
+
+    <script src="js/shake.js"></script>
+    <style>
+        .clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+        .clearfix { display:inline-block; }
+        * html .clearfix { height:1%; }
+        .clearfix{ display:block; }
+        .layer{ width: 100%; height: 100%; position: absolute; top:-100%; left: 0; z-index: 9999;}
+        .alert-top img{ width: 100%;}
+        .alert-bottom img{ width:100%;}
+        .alert-bottom{ position: relative;}
+        .keyword{ width:45%; list-style-type: none; position: absolute; top:0; left: 28%; padding:0;margin:0;}
+        .keyword li{ width: 48%; float: left; text-align: center; margin-bottom:0.6rem;border-radius: 12px; }
+        .keyword li:nth-child(2n){ float: right;}
+        .keyword li a{ width: 95%; display: inline-block; text-decoration: none;}
+        .sure-btn{ font-size: 0.72rem; padding:0.3rem 0; border-radius: 12px; outline: none;}
+        .layer.shaking{
+            transform: translateY(100%);
+            -webkit-transform: translateY(100%);
+            transition: all 1s ease-in-out;
+            -webkit-transition: all 1s ease-in-out;
+        }
+        .layer.hiding{
+            transform: translateY(-100%);
+            -webkit-transform: translateY(-100%);
+            transition: all 1s ease-in-out;
+            -webkit-transition: all 1s ease-in-out;
+        }
+        .shade-layer{ font-size: 0.6rem; padding:0.3rem; position: absolute;z-index:9999;color: #fff; background: rgba(0,0,0,0.5);
+            top:45%; left:40%; border-radius: 3px; display: none;}
+        .wrong{ width:100%; position:absolute; z-index: 9999; display:none;}
+    </style>
+</head>
+<body>
+<div class="layer">
+    <div class="alert-top">
+
+        <img src="img/alert-top.png" alt="">
+    </div>
+    <div class="alert-bottom">
+        <img src="img/alert-bottom.png" alt="">
+        <ul class="keyword clearfix">
+            <li><a href="javascript:void(0);" class="sure-btn">法拉利</a></li>
+            <li><a href="javascript:void(0);" class="sure-btn">奥迪汽车</a></li>
+            <li><a href="javascript:void(0);" class="sure-btn">福特</a></li>
+            <li><a href="javascript:void(0);" class="sure-btn">卡迪拉克</a></li>
+        </ul>
+    </div>
+</div>
+<div class="shade-layer">口令正确！</div>
+<img src="img/wrong.png" alt="" class="wrong">
+<img class="loading" src="img/loading.svg" />
+<img class="background" src="img/shake-bg.jpg" />
+<img class="top" src="img/shake-top.jpg" />
+<img class="bottom" src="img/shake-bottom.jpg" />
+<div class="alpha"></div>
+<img class="pending" src="img/pending.png" />
+<img class="drawn" src="img/drawn.png" />
+<img class="undrawn" src="img/undrawn.png" />
+<a class="drawn-text"></a>
+<audio style="display:none;" id="shakeSound" preload="metadata" controls src="sounds/shake_sound.mp3"></audio>
+</body>
+
+</html>
